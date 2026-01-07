@@ -1,0 +1,5 @@
+Popescu Ion,9.5,Bucuresti
+Ionescu Ana,8.7,Cluj
+Georgescu Maria,9.2,Iasi
+Dumitrescu Andrei,7.8,Timisoara
+Constantinescu Elena,9.0,Brasov
