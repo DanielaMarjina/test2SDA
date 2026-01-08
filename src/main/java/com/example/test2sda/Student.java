@@ -20,6 +20,6 @@ public class Student {
     }
     @Override
     public String toString() {
-        return nume + ", " + medie + ", " + localitate;
+        return "\n"+nume + ", " + medie + ", " + localitate;
     }
 }

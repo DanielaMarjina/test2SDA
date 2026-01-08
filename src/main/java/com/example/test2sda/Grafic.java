@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -44,6 +46,7 @@ public class Grafic extends Application {
     private Carte carteSelectata;
     private Student studentSelectat;
     private Button btnPrelungeste = new Button("Prelungeste");
+    private Button btnSave=new Button("Save");
 
     private List<Carte> carti = new ArrayList<>();
     private List<Student> studenti = new ArrayList<>();
@@ -296,12 +299,31 @@ public class Grafic extends Application {
 
             }
         });
+        btnSave.setOnAction(actionEvent -> {
+            File fisier=citireFisier(false);
+            if (fisier==null)
+                return;
+            try{
+                FileWriter fw=new FileWriter(fisier);
+                if(textArea.getText().isEmpty())
+                    textArea.appendText("Nu am ce salva!");
+                String sir[]=textArea.getText().split("\n");
+                for(String subsir:sir){
+                    fw.write(subsir+"\n");
+                }
+                fw.close();
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
 
         slider=getSlider();
         VBox col1 = new VBox(10, listaC, listView, btnSituatieImprumut);
         HBox nrZileBox = new HBox(10, nrZile, nrZiletxt);
         VBox col2 = new VBox(10, nrZileBox, btnImprumuta, returneazaTxt, btnReturneaza, btnImprumuturiMaiMariDe, sliderValueLabel,slider,btnInfoAutor);
-        VBox col3 = new VBox(10, listaSt, listaStudenti, btnPrelungeste, btnFisaStudentului);
+        VBox col3 = new VBox(10, listaSt, listaStudenti, btnPrelungeste, btnFisaStudentului,btnSave);
         HBox parteaSus = new HBox(10, col1, col2, col3);
         VBox panou = new VBox(10, parteaSus, textArea);
         return panou;
